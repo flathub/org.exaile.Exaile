@@ -92,20 +92,12 @@
                 {
                     "type": "git",
                     "url": "https://github.com/exaile/exaile.git",
-                    "tag": "4.1.2",
+                    "tag": "4.1.3",
                     "x-checker-data": {
                         "type": "git",
                         "tag-pattern": "^([\\d.]+)$"
                     },
-                    "commit": "47998e2387a7a56a938a581f7b873c2d5f949523"
-                },
-                {
-                    "type": "patch",
-                    "path": "icon.patch"
-                },
-                {
-                    "type": "patch",
-                    "path": "appstream.patch"
+                    "commit": "24916a64325bfd14fb91d2223ed25a8611b770c9"
                 }
             ]
         }
