@@ -1,7 +1,7 @@
 {
     "app-id": "org.exaile.Exaile",
     "runtime": "org.freedesktop.Platform",
-    "runtime-version": "22.08",
+    "runtime-version": "24.08",
     "sdk": "org.freedesktop.Sdk",
     "command": "exaile",
     "rename-desktop-file": "exaile.desktop",
@@ -22,16 +22,17 @@
     ],
     "modules": [
         {
-            "name": "BerkeleyDB",
-            "subdir": "dist",
-            "builddir": true,
+            "name": "libdb",
             "config-opts": [
-                "--enable-compat185",
-                "--enable-shared",
                 "--enable-cxx",
-                "--enable-dbm",
-                "--enable-stl"
+                "--enable-shared",
+                "--disable-static",
+                "--enable-dbm"
             ],
+            "subdir": "build_unix",
+            "build-options": {
+                "cflags": "-Wno-error=implicit-int -Wno-error=implicit-function-declaration"
+            },
             "sources": [
                 {
                     "type": "archive",
@@ -40,14 +41,28 @@
                 },
                 {
                     "type": "patch",
-                    "path": "atomic.patch"
+                    "paths": [
+                        "db-5.3.28-atomic_compare_exchange.patch"
+                    ]
                 },
                 {
                     "type": "shell",
                     "commands": [
-                        "cp -p /usr/share/automake-*/config.{sub,guess} dist"
+                        "# Update config files to understand aarch64\nfor dir in dist lang/sql/sqlite lang/sql/jdbc lang/sql/odbc; do\n  cp -v /usr/share/gnu-config/config.{guess,sub} \"$dir/\"\ndone\n"
+                    ]
+                },
+                {
+                    "type": "script",
+                    "dest": "build_unix",
+                    "dest-filename": "configure",
+                    "commands": [
+                        "exec ../dist/configure \"$@\""
                     ]
                 }
+            ],
+            "cleanup": [
+                "/bin",
+                "/docs"
             ]
         },
         {
@@ -65,8 +80,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://files.pythonhosted.org/packages/source/b/bsddb3/bsddb3-6.2.7.tar.gz",
-                    "sha256": "b0f7fa63eb240cd5815809c9d1d7df9f7cc8d6fa9619d0edbe9c794afc02dc9f"
+                    "url": "https://files.pythonhosted.org/packages/f0/24/92034482656945fc6ceb10551222b43a0ff8d0c87e15839120487820067e/bsddb3-6.2.9.tar.gz",
+                    "sha256": "70d05ec8dc568f42e70fc919a442e0daadc2a905a1cfb7ca77f549d49d6e7801"
                 }
             ]
         },
@@ -92,12 +107,12 @@
                 {
                     "type": "git",
                     "url": "https://github.com/exaile/exaile.git",
-                    "tag": "4.1.3",
+                    "tag": "4.1.4",
                     "x-checker-data": {
                         "type": "git",
                         "tag-pattern": "^([\\d.]+)$"
                     },
-                    "commit": "24916a64325bfd14fb91d2223ed25a8611b770c9"
+                    "commit": "f9cbf854aaeebbe80d8ac3030bb71765d9959987"
                 }
             ]
         }
