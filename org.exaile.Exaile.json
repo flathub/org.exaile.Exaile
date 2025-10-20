@@ -5,7 +5,7 @@
     "sdk": "org.freedesktop.Sdk",
     "command": "exaile",
     "rename-desktop-file": "exaile.desktop",
-    "rename-appdata-file": "exaile.appdata.xml",
+    "rename-appdata-file": "org.exaile.exaile.appdata.xml",
     "rename-icon": "exaile",
     "finish-args": [
         "--share=ipc",
@@ -107,12 +107,12 @@
                 {
                     "type": "git",
                     "url": "https://github.com/exaile/exaile.git",
-                    "tag": "4.1.4",
+                    "tag": "4.2.0",
                     "x-checker-data": {
                         "type": "git",
                         "tag-pattern": "^([\\d.]+)$"
                     },
-                    "commit": "f9cbf854aaeebbe80d8ac3030bb71765d9959987"
+                    "commit": "d849235c8ad896603f6dcf22d05be463c226f76a"
                 }
             ]
         }
