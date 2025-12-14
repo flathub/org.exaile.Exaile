@@ -75,7 +75,7 @@
                 }
             },
             "build-commands": [
-                "pip3 install --no-deps --no-use-pep517 --prefix=/app ."
+                "pip3 install --no-deps --no-build-isolation --prefix=/app ."
             ],
             "sources": [
                 {
