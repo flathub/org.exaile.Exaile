@@ -107,12 +107,12 @@
                 {
                     "type": "git",
                     "url": "https://github.com/exaile/exaile.git",
-                    "tag": "4.2.1",
+                    "tag": "4.2.2",
                     "x-checker-data": {
                         "type": "git",
                         "tag-pattern": "^([\\d.]+)$"
                     },
-                    "commit": "fd38ec5b69edd8741cf4ef4258fb2bd07a9ea2f9"
+                    "commit": "f7aed9a79ab99f4d99be11f95bed28cadaa2faea"
                 }
             ]
         }
