@@ -8,12 +8,21 @@
         {
             "type": "file",
             "url": "https://files.pythonhosted.org/packages/9c/1f/19ebc343cc71a7ffa78f17018535adc5cbdd87afb31d7c34874680148b32/ifaddr-0.2.0-py3-none-any.whl",
-            "sha256": "085e0305cfe6f16ab12d72e2024030f5d52674afad6911bb1eee207177b8a748"
+            "sha256": "085e0305cfe6f16ab12d72e2024030f5d52674afad6911bb1eee207177b8a748",
+            "x-checker-data": {
+                "type": "pypi",
+                "name": "ifaddr",
+                "packagetype": "bdist_wheel"
+            }
         },
         {
             "type": "file",
-            "url": "https://files.pythonhosted.org/packages/e2/78/f681afade2a4e7a9ade696cf3d3dcd9905e28720d74c16cafb83b5dd5c0a/zeroconf-0.147.0.tar.gz",
-            "sha256": "f517375de6bf2041df826130da41dc7a3e8772176d3076a5da58854c7d2e8d7a"
+            "url": "https://files.pythonhosted.org/packages/02/c9/6f709eff8433f587fe2ad2c7232e7b64cb2f4c25924b009bc2be493cea93/zeroconf-0.149.3.tar.gz",
+            "sha256": "333a634ec67b00943063e7bb4410ae662da9fd25d2d059ccc454ff39991e760d",
+            "x-checker-data": {
+                "type": "pypi",
+                "name": "zeroconf"
+            }
         }
     ]
 }
