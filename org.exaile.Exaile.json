@@ -1,7 +1,7 @@
 {
     "app-id": "org.exaile.Exaile",
     "runtime": "org.freedesktop.Platform",
-    "runtime-version": "24.08",
+    "runtime-version": "25.08",
     "sdk": "org.freedesktop.Sdk",
     "command": "exaile",
     "rename-desktop-file": "exaile.desktop",
@@ -18,73 +18,16 @@
     ],
     "cleanup": [
         "/include",
-        "/lib/pkgconfig"
+        "/lib/pkgconfig",
+        "/share/bash-completion",
+        "/share/fish",
+        "/share/man",
+        "*.la"
     ],
     "modules": [
-        {
-            "name": "libdb",
-            "config-opts": [
-                "--enable-cxx",
-                "--enable-shared",
-                "--disable-static",
-                "--enable-dbm"
-            ],
-            "subdir": "build_unix",
-            "build-options": {
-                "cflags": "-Wno-error=implicit-int -Wno-error=implicit-function-declaration"
-            },
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://download.oracle.com/berkeley-db/db-5.3.28.tar.gz",
-                    "sha256": "e0a992d740709892e81f9d93f06daf305cf73fb81b545afe72478043172c3628"
-                },
-                {
-                    "type": "patch",
-                    "paths": [
-                        "db-5.3.28-atomic_compare_exchange.patch"
-                    ]
-                },
-                {
-                    "type": "shell",
-                    "commands": [
-                        "# Update config files to understand aarch64\nfor dir in dist lang/sql/sqlite lang/sql/jdbc lang/sql/odbc; do\n  cp -v /usr/share/gnu-config/config.{guess,sub} \"$dir/\"\ndone\n"
-                    ]
-                },
-                {
-                    "type": "script",
-                    "dest": "build_unix",
-                    "dest-filename": "configure",
-                    "commands": [
-                        "exec ../dist/configure \"$@\""
-                    ]
-                }
-            ],
-            "cleanup": [
-                "/bin",
-                "/docs"
-            ]
-        },
-        {
-            "name": "python3-bsddb3",
-            "buildsystem": "simple",
-            "build-options": {
-                "no-debuginfo": true,
-                "env": {
-                    "BERKELEYDB_DIR": "/app"
-                }
-            },
-            "build-commands": [
-                "pip3 install --no-deps --no-build-isolation --prefix=/app ."
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://files.pythonhosted.org/packages/f0/24/92034482656945fc6ceb10551222b43a0ff8d0c87e15839120487820067e/bsddb3-6.2.9.tar.gz",
-                    "sha256": "70d05ec8dc568f42e70fc919a442e0daadc2a905a1cfb7ca77f549d49d6e7801"
-                }
-            ]
-        },
+        "libdb.json",
+        "python3-bsdb3.json",
+        "python3-meson-python.json",
         "python3-pycairo.json",
         "python3-gobject.json",
         "python3-PyGObject.json",
@@ -108,11 +51,12 @@
                     "type": "git",
                     "url": "https://github.com/exaile/exaile.git",
                     "tag": "4.2.2",
+                    "commit": "f7aed9a79ab99f4d99be11f95bed28cadaa2faea",
                     "x-checker-data": {
+                        "is-main-source": "true",
                         "type": "git",
                         "tag-pattern": "^([\\d.]+)$"
-                    },
-                    "commit": "f7aed9a79ab99f4d99be11f95bed28cadaa2faea"
+                    }
                 }
             ]
         }

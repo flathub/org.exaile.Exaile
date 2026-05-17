@@ -1,0 +1,44 @@
+{
+    "name": "libdb",
+    "config-opts": [
+        "--enable-cxx",
+        "--enable-shared",
+        "--disable-static",
+        "--enable-dbm"
+    ],
+    "subdir": "build_unix",
+    "build-options": {
+        "cflags": "-Wno-error=implicit-int -Wno-error=implicit-function-declaration -Wno-error=incompatible-pointer-types"
+    },
+    "sources": [
+        {
+            "type": "archive",
+            "url": "https://download.oracle.com/berkeley-db/db-5.3.28.tar.gz",
+            "sha256": "e0a992d740709892e81f9d93f06daf305cf73fb81b545afe72478043172c3628"
+        },
+        {
+            "type": "patch",
+            "paths": [
+                "db-5.3.28-atomic_compare_exchange.patch"
+            ]
+        },
+        {
+            "type": "shell",
+            "commands": [
+                "# Update config files to understand aarch64\nfor dir in dist lang/sql/sqlite lang/sql/jdbc lang/sql/odbc; do\n  cp -v /usr/share/automake-*/config.{guess,sub} \"$dir/\"\ndone\n"
+            ]
+        },
+        {
+            "type": "script",
+            "dest": "build_unix",
+            "dest-filename": "configure",
+            "commands": [
+                "exec ../dist/configure \"$@\""
+            ]
+        }
+    ],
+    "cleanup": [
+        "/bin",
+        "/docs"
+    ]
+}
