@@ -53,7 +53,7 @@
                     "tag": "4.2.2",
                     "commit": "f7aed9a79ab99f4d99be11f95bed28cadaa2faea",
                     "x-checker-data": {
-                        "is-main-source": "true",
+                        "is-main-source": true,
                         "type": "git",
                         "tag-pattern": "^([\\d.]+)$"
                     }
