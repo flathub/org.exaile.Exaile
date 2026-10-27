@@ -1,0 +1,64 @@
+app-id: org.exaile.Exaile
+runtime: org.freedesktop.Platform
+runtime-version: '26.08'
+sdk: org.freedesktop.Sdk
+command: exaile
+rename-desktop-file: exaile.desktop
+rename-appdata-file: org.exaile.exaile.appdata.xml
+rename-icon: exaile
+finish-args:
+  - --share=ipc
+  - --share=network
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --socket=pulseaudio
+  - --system-talk-name=org.freedesktop.UDisks2
+  - --filesystem=xdg-music
+cleanup:
+  - /include
+  - /lib/pkgconfig
+  - /share/bash-completion
+  - /share/fish
+  - /share/man
+  - '*.la'
+modules:
+  - libdb.json
+
+  # Does not support flatpak-pip-generator
+  - name: python3-bsddb3
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+      env:
+        BERKELEYDB_DIR: /app
+    build-commands:
+      - pip3 install --no-deps --no-build-isolation --prefix=/app .
+    sources:
+      - type: archive
+        url: https://files.pythonhosted.org/packages/f0/24/92034482656945fc6ceb10551222b43a0ff8d0c87e15839120487820067e/bsddb3-6.2.9.tar.gz
+        sha256: 70d05ec8dc568f42e70fc919a442e0daadc2a905a1cfb7ca77f549d49d6e7801
+
+  # Easiear to build with meson.
+  - name: dbus-python
+    buildsystem: meson
+    sources:
+      - type: archive
+        url: https://dbus.freedesktop.org/releases/dbus-python/dbus_python-1.5.1.tar.gz
+        sha256: 57423cf87d09b7d084f420b55b737fe654c33339b06df77945620d97795c6ac4
+
+  - python3-requirements-dev.yaml
+  - python3-requirements.yaml
+
+  - name: exaile
+    buildsystem: simple
+    build-commands:
+      - make PREFIX=/app
+      - make install PREFIX=/app
+    sources:
+      - type: git
+        url: https://github.com/exaile/exaile.git
+        tag: 4.2.2
+        commit: f7aed9a79ab99f4d99be11f95bed28cadaa2faea
+        x-checker-data:
+          type: git
+          tag-pattern: ^([\d.]+)$
